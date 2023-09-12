@@ -1,37 +1,45 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
 public class OnClickStartGrav : MonoBehaviour
 {
-    public Rigidbody rb;
+    public Rigidbody2D rb;
     float SpawnTime = 0;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
         SpawnTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 0.5){
+        if(Input.anyKey){
+            EnableGravity();
+        }
+
+        if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 1 && rb.gravityScale != 0){
+            Debug.Log("I trigger");
             FindAnyObjectByType<Spawner>().SpawnNext();
             enabled = false;
         }
 
-        if(Input.anyKey){
-            rb.useGravity = true;
-        }
+        
     }
 
     void OnCollision(){
         // rb.velocity = new Vector3(0,10,0);
         Debug.Log("Collision detected! Stopping gravity");
-        rb.useGravity = false;
-        rb.velocity = new Vector3(0,1,0);
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(0,1);
+    }
+    void EnableGravity(){
+        rb.gravityScale = 1;
+        SpawnTime = Time.time;
     }
 }

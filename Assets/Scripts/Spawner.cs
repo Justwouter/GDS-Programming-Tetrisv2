@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
     // Groups
     public GameObject[] groups;
     public List<GameObject> blocksInScene;
+
+    
 
     // Start is called before the first frame update
     void Start(){
@@ -18,6 +21,7 @@ public class Spawner : MonoBehaviour {
     public void SpawnNext() {
     // Random Index
         Debug.Log("Spawn triggered!");
+        FindAnyObjectByType<TextMeshPro>().SetText("Score: "+blocksInScene.Count); //set before block spawn
         int i = Random.Range(0, groups.Length);
         // Spawn Group at current Position
         GameObject newObject = groups[i];
