@@ -8,6 +8,7 @@ public class OnClickStartGrav : MonoBehaviour
 {
     public Rigidbody2D rb;
     float SpawnTime = 0;
+    bool hasDropped = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,12 @@ public class OnClickStartGrav : MonoBehaviour
             EnableGravity();
         }
 
-        if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 1 && rb.gravityScale != 0){
+        if(!hasDropped){
+            Vector2 mousPosition = Input.mousePosition;
+            transform.position = new Vector2(mousPosition.x,mousPosition.y);
+        }
+
+        if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 1 && hasDropped){
             Debug.Log("I trigger");
             FindAnyObjectByType<Spawner>().SpawnNext();
             enabled = false;
@@ -41,5 +47,6 @@ public class OnClickStartGrav : MonoBehaviour
     void EnableGravity(){
         rb.gravityScale = 1;
         SpawnTime = Time.time;
+        hasDropped = true;
     }
 }
