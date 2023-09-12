@@ -5,19 +5,26 @@ using UnityEngine;
 public class OnClickStartGrav : MonoBehaviour
 {
     public Rigidbody rb;
+    float SpawnTime = 0;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        rb.useGravity = false;
+        SpawnTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Physics.gravity *= -1;
+        
+        if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 0.5){
+            FindAnyObjectByType<Spawner>().SpawnNext();
+            enabled = false;
+        }
+
+        if(Input.anyKey){
+            rb.useGravity = true;
         }
     }
 

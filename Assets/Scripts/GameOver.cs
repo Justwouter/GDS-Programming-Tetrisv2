@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OnTriggerGameOver : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
