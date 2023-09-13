@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
-public class OnClickStartGrav : MonoBehaviour
+public class BlockScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     float SpawnTime = 0;
@@ -24,10 +24,10 @@ public class OnClickStartGrav : MonoBehaviour
             EnableGravity();
         }
 
-        if(!hasDropped){
-            Vector2 mousPosition = Input.mousePosition;
-            transform.position = new Vector2(mousPosition.x,mousPosition.y);
-        }
+        // if(!hasDropped){
+        //     Vector2 mousPosition = Input.mousePosition;
+        //     transform.position = new Vector2(mousPosition.x,mousPosition.y);
+        // }
 
         if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 1 && hasDropped){
             Debug.Log("I trigger");

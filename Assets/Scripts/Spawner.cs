@@ -6,13 +6,15 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
     // Groups
     public GameObject[] groups;
-    public List<GameObject> blocksInScene;
+    private int amountOfSpawns;
+    private float baseLine;
 
     
 
     // Start is called before the first frame update
     void Start(){
         SpawnNext();
+        baseLine = FindObjectOfType<GameOver>().transform.position.y;
     }
 
     // Update is called once per frame
@@ -21,14 +23,18 @@ public class Spawner : MonoBehaviour {
     public void SpawnNext() {
     // Random Index
         Debug.Log("Spawn triggered!");
-        FindAnyObjectByType<TextMeshPro>().SetText("Score: "+blocksInScene.Count); //set before block spawn
+        // FindAnyObjectByType<TextMeshPro>().SetText("Score: "+blocksInScene.Count); //set before block spawn
         int i = Random.Range(0, groups.Length);
+
+        
+        FindAnyObjectByType<TextMeshPro>().SetText("Score: {0:2}", CheckBlocks()-baseLine);
+        MoveSpawnerHight();
         // Spawn Group at current Position
         GameObject newObject = groups[i];
         Instantiate(newObject, transform.position, Quaternion.identity);
-        blocksInScene.Add(newObject);
-        MoveSpawnerHight();
-
+        amountOfSpawns++;
+        
+        
     }
 
     private void MoveSpawnerHight(){
@@ -39,16 +45,17 @@ public class Spawner : MonoBehaviour {
             newYPos = highestBlock+5;
         }
 
-        transform.position.Set(transform.position.x,newYPos,transform.position.z);
+        transform.position = new Vector2(transform.position.x,newYPos);
     }
     private float CheckBlocks(){
         float highestY = 0;
-        foreach(GameObject go in blocksInScene){
+        foreach(BlockScript go in FindObjectsOfType<BlockScript>()){
             if(go.transform.position.y > highestY){
                 highestY = go.transform.position.y;
             }
         }
         return highestY;
     }
+
 
 }

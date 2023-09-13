@@ -16,9 +16,12 @@ public class GameOver : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other) {
+
+    private void OnCollision2D(Collision2D other) {
         Debug.Log("Trigger detected collision with "+other.gameObject.name);
         var Trigger = other.gameObject;
-        Trigger.SendMessage("OnCollision");
+        FindAnyObjectByType<Spawner>().enabled = false;
     }
+
+    
 }

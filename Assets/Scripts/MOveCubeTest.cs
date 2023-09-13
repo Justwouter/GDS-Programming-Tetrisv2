@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MOveCubeTest : MonoBehaviour
 {
-    [SerializeField]public Camera cam;
+    public Camera cam;
 
     // Start is called before the first frame update
     void Start()
