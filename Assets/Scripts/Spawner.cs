@@ -2,39 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour {
-    // Groups
-    public GameObject[] groups;
+    public GameObject[] spawnables;
+    public float speed = 2;
     private int amountOfSpawns;
     private float baseLine;
-
+    private Vector2 movement = Vector2.zero;
     
 
-    // Start is called before the first frame update
     void Start(){
         SpawnNext();
         baseLine = FindObjectOfType<GameOver>().transform.position.y;
     }
 
-    // Update is called once per frame
-    void Update(){}
+    void Update(){
+        transform.Translate(speed * Time.deltaTime * movement);
+    }
 
     public void SpawnNext() {
-    // Random Index
         Debug.Log("Spawn triggered!");
-        // FindAnyObjectByType<TextMeshPro>().SetText("Score: "+blocksInScene.Count); //set before block spawn
-        int i = Random.Range(0, groups.Length);
+        int i = Random.Range(0, spawnables.Length);
 
         
         FindAnyObjectByType<TextMeshPro>().SetText("Score: {0:2}", CheckBlocks()-baseLine);
         MoveSpawnerHight();
-        // Spawn Group at current Position
-        GameObject newObject = groups[i];
-        Instantiate(newObject, transform.position, Quaternion.identity);
+
+        // Spawn Item at current Position
+        Instantiate(spawnables[i], transform.position, Quaternion.identity);
         amountOfSpawns++;
-        
-        
     }
 
     private void MoveSpawnerHight(){
@@ -55,6 +52,10 @@ public class Spawner : MonoBehaviour {
             }
         }
         return highestY;
+    }
+
+    private void OnMove(InputValue inputValue){
+        movement = inputValue.Get<Vector2>();
     }
 
 
