@@ -9,12 +9,15 @@ public class Spawner : MonoBehaviour {
     private int amountOfSpawns;
     private float baseLine;
 
+    private float startHight;
+
     
 
     // Start is called before the first frame update
     void Start(){
         SpawnNext();
         baseLine = FindObjectOfType<GameOver>().transform.position.y;
+        startHight = transform.position.y;
     }
 
     // Update is called once per frame
@@ -44,6 +47,9 @@ public class Spawner : MonoBehaviour {
         if(highestBlock > transform.position.y-5){
             newYPos = highestBlock+5;
         }
+        if(highestBlock < startHight-5){
+            newYPos = startHight;
+        }
 
         transform.position = new Vector2(transform.position.x,newYPos);
     }
@@ -56,6 +62,4 @@ public class Spawner : MonoBehaviour {
         }
         return highestY;
     }
-
-
 }
