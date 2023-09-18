@@ -56,7 +56,7 @@ public class Spawner : MonoBehaviour {
     }
     private float CheckBlocks(){
         float highestY = 0;
-        foreach(BlockScript go in FindObjectsOfType<BlockScript>()){
+        foreach(Spawnable go in FindObjectsOfType<Spawnable>()){
             if(go.transform.position.y > highestY){
                 highestY = go.transform.position.y;
             }
