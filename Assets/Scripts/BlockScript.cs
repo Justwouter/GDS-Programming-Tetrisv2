@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities.UniversalDelegates;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BlockScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     float SpawnTime = 0;
     bool hasDropped = false;
+    Vector2 movement = Vector2.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +23,10 @@ public class BlockScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKey){
-            EnableGravity();
+        if(!hasDropped){
+            transform.Translate(FindAnyObjectByType<Spawner>().speed * Time.deltaTime * movement);
         }
-
-        // if(!hasDropped){
-        //     Vector2 mousPosition = Input.mousePosition;
-        //     transform.position = new Vector2(mousPosition.x,mousPosition.y);
-        // }
-
+        
         if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 1 && hasDropped){
             Debug.Log("I trigger");
             FindAnyObjectByType<Spawner>().SpawnNext();
@@ -38,12 +36,13 @@ public class BlockScript : MonoBehaviour
         
     }
 
-    void OnCollision(){
-        // rb.velocity = new Vector3(0,10,0);
-        Debug.Log("Collision detected! Stopping gravity");
-        rb.gravityScale = 0;
-        rb.velocity = new Vector2(0,1);
+    void OnMove(InputValue inputValue){
+        movement = inputValue.Get<Vector2>();
     }
+    void OnDrop(InputValue inputValue){
+        EnableGravity();
+    }
+
     void EnableGravity(){
         rb.gravityScale = 1;
         SpawnTime = Time.time;
