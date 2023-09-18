@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BlockScript : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     float SpawnTime = 0;
     bool hasDropped = false;
     Vector2 movement = Vector2.zero;

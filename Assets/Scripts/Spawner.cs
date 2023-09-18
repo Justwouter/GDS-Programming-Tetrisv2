@@ -10,8 +10,8 @@ public class Spawner : MonoBehaviour {
     private int amountOfSpawns;
     private float floorLine;
     private float startHight;
-
     private Vector2 movement = Vector2.zero;
+    public bool isActive = true;
 
     
 
@@ -26,16 +26,19 @@ public class Spawner : MonoBehaviour {
     }
 
     public void SpawnNext() {
-        Debug.Log("Spawn triggered!");
-        int i = Random.Range(0, spawnables.Length);
+        if(isActive){
+            Debug.Log("Spawn triggered!");
+            int i = Random.Range(0, spawnables.Length);
 
-        // Find & update scoreboard and move spawner if neccesary
-        FindAnyObjectByType<TextMeshPro>().SetText("Score: {0:2}", CheckBlocks()-floorLine);
-        MoveSpawnerHight();
+            // Find & update scoreboard and move spawner if neccesary
+            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", CheckBlocks()-floorLine);
+            MoveSpawnerHight();
 
-        // Spawn Item at current Position
-        Instantiate(spawnables[i], transform.position, Quaternion.identity);
-        amountOfSpawns++;
+            // Spawn Item at current Position
+            Instantiate(spawnables[i], transform.position, Quaternion.identity);
+            amountOfSpawns++;
+        }
+        
     }
 
     private void MoveSpawnerHight(){
@@ -59,6 +62,11 @@ public class Spawner : MonoBehaviour {
             }
         }
         return highestY;
+    }
+
+    void OnMove(InputValue inputValue){
+        movement = inputValue.Get<Vector2>();
+
     }
 
 
