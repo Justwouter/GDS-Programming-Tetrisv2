@@ -8,15 +8,16 @@ public class Spawner : MonoBehaviour {
     public GameObject[] spawnables;
     public float speed = 2;
     private int amountOfSpawns;
-    private float baseLine;
-    private Vector2 movement = Vector2.zero;
+    private float floorLine;
     private float startHight;
+
+    private Vector2 movement = Vector2.zero;
 
     
 
     void Start(){
         SpawnNext();
-        baseLine = FindObjectOfType<GameOver>().transform.position.y;
+        floorLine = FindObjectOfType<GameOver>().transform.position.y;
         startHight = transform.position.y;
     }
 
@@ -28,8 +29,8 @@ public class Spawner : MonoBehaviour {
         Debug.Log("Spawn triggered!");
         int i = Random.Range(0, spawnables.Length);
 
-        
-        FindAnyObjectByType<TextMeshPro>().SetText("Score: {0:2}", CheckBlocks()-baseLine);
+        // Find & update scoreboard and move spawner if neccesary
+        FindAnyObjectByType<TextMeshPro>().SetText("Score: {0:2}", CheckBlocks()-floorLine);
         MoveSpawnerHight();
 
         // Spawn Item at current Position
