@@ -10,7 +10,7 @@ public class Spawnable : MonoBehaviour
 {
     private Rigidbody2D rb;
     float SpawnTime = 0;
-    bool hasDropped = false;
+    private bool hasDropped = false;
     Vector2 movement = Vector2.zero;
 
     void Start()
