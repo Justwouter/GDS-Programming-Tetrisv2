@@ -6,11 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour {
     public GameObject[] spawnables;
-    public float speed = 2;
+    public float speed = 3.5F;
     private int amountOfSpawns;
     private float floorLine;
     private float startHight;
-    private Vector2 movement = Vector2.zero;
     public bool isActive = true;
 
     
@@ -22,8 +21,9 @@ public class Spawner : MonoBehaviour {
     }
 
     void Update(){
-        transform.Translate(speed * Time.deltaTime * movement);
+        
     }
+
 
     public void SpawnNext() {
         if(isActive){
@@ -41,6 +41,7 @@ public class Spawner : MonoBehaviour {
         
     }
 
+    // If the tower becomes to high, move the spawner up so it is always 5 blocks above
     private void MoveSpawnerHight(){
         float newYPos = transform.position.y;
         float highestBlock = CheckBlocks();
@@ -54,6 +55,8 @@ public class Spawner : MonoBehaviour {
 
         transform.position = new Vector2(transform.position.x,newYPos);
     }
+
+    // Find the highest point in the tower
     private float CheckBlocks(){
         float highestY = 0;
         foreach(Spawnable go in FindObjectsOfType<Spawnable>()){
@@ -63,11 +66,5 @@ public class Spawner : MonoBehaviour {
         }
         return highestY;
     }
-
-    void OnMove(InputValue inputValue){
-        movement = inputValue.Get<Vector2>();
-
-    }
-
 
 }

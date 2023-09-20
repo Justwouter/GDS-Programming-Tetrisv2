@@ -23,7 +23,7 @@ public class GameOver : MonoBehaviour
         DisableGame();
     }
 
-    private void DisableGame(){
+    public void DisableGame(){
         // Disables spawner & removes non-dropped items if NextSpawn() triggered before gameover
         FindAnyObjectByType<Spawner>().isActive = false;
         Spawnable[] spawnedObjects = FindObjectsByType<Spawnable>(FindObjectsSortMode.None);

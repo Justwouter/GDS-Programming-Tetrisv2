@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class Spawnable : MonoBehaviour
 {
     private Rigidbody2D rb;
-    float SpawnTime = 0;
+    float DropTime = 0;
     private bool hasDropped = false;
     Vector2 movement = Vector2.zero;
 
@@ -18,17 +18,23 @@ public class Spawnable : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = -0;
         rb.Sleep(); //Needed to avoid the slowfalling on first spawn
-        SpawnTime = Time.time;
     }
 
     void Update()
     {
+        // Enable movement in pre-drop stage
         if(!hasDropped){
-            transform.Translate(FindAnyObjectByType<Spawner>().speed * Time.deltaTime * movement);
+            GameOver floor = FindAnyObjectByType<GameOver>();
+            float floorWidth = floor.GetComponent<MeshRenderer>().bounds.size.x / 2;
+
+            // Only allow movement within the floor bounds
+            if(Mathf.Abs(transform.position.x + movement.x) < floorWidth){
+                transform.Translate(FindAnyObjectByType<Spawner>().speed * Time.deltaTime * movement);
+            }
         }
         
-        // Spawn next item when current item becomes stationary.
-        if (rb.velocity.magnitude <= 0.01f && Time.time - SpawnTime > 1 && hasDropped){
+        // Spawn next item when current item becomes stationary & at least a second has passed.
+        if (rb.velocity.magnitude <= 0.01f && Time.time - DropTime > 1 && hasDropped){
             Debug.Log("I trigger");
             FindAnyObjectByType<Spawner>().SpawnNext();
             enabled = false;
@@ -42,6 +48,7 @@ public class Spawnable : MonoBehaviour
     void OnMove(InputValue inputValue){
         movement = inputValue.Get<Vector2>();
     }
+
     void OnDrop(InputValue inputValue){
         EnableGravity();
     }
@@ -51,7 +58,7 @@ public class Spawnable : MonoBehaviour
     void EnableGravity(){
         rb.gravityScale = 1;
         rb.WakeUp();
-        SpawnTime = Time.time;
+        DropTime = Time.time;
         hasDropped = true;
     }
 }
