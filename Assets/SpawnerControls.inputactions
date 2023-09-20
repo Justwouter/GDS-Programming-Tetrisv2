@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "2a631d9b-2218-49c3-862a-70737e549434",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -17,16 +17,16 @@
                 {
                     "name": "Drop",
                     "type": "Button",
-                    "id": "b8bc327d-53ad-4fb2-94a5-148c66931ba4",
+                    "id": "43e1e129-3532-47ed-b472-e8c6c041dac0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "2D Vector - WASD",
                     "id": "1752a9b7-0003-4889-af79-4c0b9b420c10",
                     "path": "2DVector",
                     "interactions": "",
@@ -81,12 +81,89 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "a6c97347-7ce9-4a0c-8d03-5cbac4fb49f8",
-                    "path": "<Keyboard>/space",
+                    "name": "2D Vector - Arrows",
+                    "id": "d6b11271-0f1c-4e73-89db-a7d11ff50c02",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "a3d42239-9ab8-44f7-a6ce-78bc18fe27c6",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "73a5ba12-d44b-4bcc-9546-4afbc0d2e21a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "73c84c8e-c8bd-4a88-952c-e10995ac08f6",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f871ee31-7601-417e-970a-ba6f4b8c00c3",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9ebb1c39-4cd7-4689-87bd-58ef161e6a0e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8d4591d-6b60-468b-9e53-e55fd32cc4c5",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "998163d1-af2c-4040-af44-2d6b079bc7be",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse",
                     "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -101,6 +178,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }

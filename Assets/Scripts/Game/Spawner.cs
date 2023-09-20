@@ -45,7 +45,6 @@ public class Spawner : MonoBehaviour {
             Instantiate(spawnables[i], transform.position, Quaternion.identity);
             amountOfSpawns++;
         }
-        
     }
 
     // If the tower becomes to high, move the spawner up so it is always 5 blocks above
