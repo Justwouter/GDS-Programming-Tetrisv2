@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour {
     public GameObject[] spawnables;
     public float speed = 3.5F;
     private int amountOfSpawns;
+    private float currentScore = 0;
     private float floorLine;
     private float startHight;
     public bool isActive = true;
@@ -24,14 +25,20 @@ public class Spawner : MonoBehaviour {
         
     }
 
+    // Store score in local data to use in GameOver scene
+    void OnDisable(){
+        PlayerPrefs.SetFloat("score", currentScore);
+    }
+
 
     public void SpawnNext() {
         if(isActive){
             Debug.Log("Spawn triggered!");
             int i = Random.Range(0, spawnables.Length);
 
+            currentScore = CheckBlocks()-floorLine;
             // Find & update scoreboard and move spawner if neccesary
-            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", CheckBlocks()-floorLine);
+            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", currentScore);
             MoveSpawnerHight();
 
             // Spawn Item at current Position
