@@ -13,12 +13,17 @@ public class MoveCameraCollision : MonoBehaviour
         spawner = FindAnyObjectByType<Spawner>();
     }
 
-    // offset = half added
+    
     void Update()
     {
         if(spawner.transform.position.y > _boxC2D.size.y){
-            add = spawner.transform.position.y - (_boxC2D.size.y/2);
+            // Get the y offset from the center of box
+            add = spawner.transform.position.y - ((_boxC2D.size.y + _boxC2D.offset.y)/2);
+
+            // Add the half of the new amount as offset to keep bottom in same place
             _boxC2D.offset = new Vector2(0,_boxC2D.offset.y+(add/2));
+
+            // Add full amount too the box
             _boxC2D.size = new Vector2(_boxC2D.size.x, _boxC2D.size.y+add);
         }
         
