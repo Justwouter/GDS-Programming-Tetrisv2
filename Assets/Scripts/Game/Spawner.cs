@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour {
         if(isActive){
             Debug.Log("Spawn triggered!");
             int i = Random.Range(0, spawnables.Length);
-
+            i = 3;
             currentScore = CheckBlocks()-floorLine;
             // Find & update scoreboard and move spawner if neccesary
             FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", currentScore);
