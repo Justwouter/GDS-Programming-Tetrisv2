@@ -43,6 +43,17 @@ namespace API.Controllers
             return allScores.OrderBy(e => e.Highscore).Take(10).ToList();
         }
 
+        [HttpGet("GetScoreBoardEntry/{id}")]
+        public async Task<ActionResult<Score>> GetScoreBoardEntry(int id)
+        {
+          if (_context.Scores == null)
+          {
+              return NotFound();
+          }
+            var allScores = await _context.Scores.ToListAsync();
+            return allScores.OrderBy(e => e.Highscore).Reverse().Take(10).ToArray()[id];
+        }
+
         // GET: api/Score/5
         [HttpGet("GetScore/{id}")]
         public async Task<ActionResult<Score>> GetScore(int id)
