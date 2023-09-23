@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class GameOverMenuHighscores : MonoBehaviour {
     float _score;
-    public string Username;
+    string _username;
     TextMeshProUGUI _inputField;
     Button _submitButton;
 
@@ -23,7 +23,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
     }
 
     void Update() {
-        Username = _inputField.GetParsedText();
+        _username = _inputField.GetParsedText();
         EvalName();
     }
 
@@ -38,7 +38,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
 
     IEnumerator SendRequest(){
         WWWForm form = new();
-        form.AddField("userName",Username);
+        form.AddField("userName",_username);
         form.AddField("highscore",_score.ToString().Replace(".",","), Encoding.UTF8);
 
         UnityWebRequest request = UnityWebRequest.Post("http://localhost:5118/api/ScoreBoard/NewScoreForm", form);

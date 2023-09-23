@@ -412,7 +412,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 553449350}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOverMenuHighscores, Assembly-CSharp
         m_MethodName: EvalName
         m_Mode: 1
@@ -722,7 +722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb35c0c94e74ea48aef00fde14c68fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Username: 
 --- !u!1 &589043125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,7 +1969,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 553449350}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOverMenuHighscores, Assembly-CSharp
         m_MethodName: OnSubmit
         m_Mode: 1
