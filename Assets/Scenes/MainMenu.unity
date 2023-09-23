@@ -1460,8 +1460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bbc727f7b5ba8e4fb9fa78e0f3fc58d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfRows: 5
-  rowPrefab: {fileID: 5136208037492524985, guid: caab337f7f1ee5a4c8bca428c99d9369, type: 3}
+  AmountOfRows: 5
+  RowPrefab: {fileID: 5136208037492524985, guid: caab337f7f1ee5a4c8bca428c99d9369, type: 3}
 --- !u!1 &1926174725
 GameObject:
   m_ObjectHideFlags: 0
