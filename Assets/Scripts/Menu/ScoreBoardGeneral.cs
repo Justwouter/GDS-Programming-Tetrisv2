@@ -15,9 +15,7 @@ public class ScoreBoardGeneral : MonoBehaviour
     
 
     void Start(){
-        // PopulateScoreBoard();
         StartCoroutine(GetScoreboard());
-        Debug.Log(JsonUtility.ToJson(new ScoreboardEntry()));
     }
 
     void Update()
