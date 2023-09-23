@@ -14,6 +14,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
     string _username;
     TextMeshProUGUI _inputField;
     Button _submitButton;
+    bool _buttonUsed = false;
 
     void Start() {
         _score = float.Parse(PlayerPrefs.GetFloat("score").ToString("n2"));
@@ -28,20 +29,32 @@ public class GameOverMenuHighscores : MonoBehaviour {
     }
 
     public void EvalName(){
-        Regex usernameMatcher = new("[a-zA-Z]{4,10}");
-        _submitButton.interactable = usernameMatcher.IsMatch(_inputField.GetParsedText());
+        Regex usernameMatcher = new(@"\b[a-zA-Z]{4,10}\b");
+        if(!_buttonUsed)
+            _submitButton.interactable = usernameMatcher.IsMatch(_inputField.GetParsedText());
     }
 
     public void OnSubmit(){
         StartCoroutine(SendRequest());
+        _submitButton.enabled = false;
+        _buttonUsed = true;
+        _submitButton.interactable = false;
+        
+
     }
 
     IEnumerator SendRequest(){
+        // Send data as www-form-urlencoded to the API
         WWWForm form = new();
         form.AddField("userName",_username);
         form.AddField("highscore",_score.ToString().Replace(".",","), Encoding.UTF8);
 
         UnityWebRequest request = UnityWebRequest.Post("http://localhost:5118/api/ScoreBoard/NewScoreForm", form);
+        
+        // Disable/clear     inputbox as visual feedback after API request is made
+        _inputField.enabled = false;
+        
+
         yield return request.SendWebRequest();
         Debug.Log(request.result);
     }
