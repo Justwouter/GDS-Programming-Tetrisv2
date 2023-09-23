@@ -74,8 +74,22 @@ namespace API.Controllers
 
         // POST: api/Score
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("NewScoreForm")]
+        public async Task<ActionResult<Score>> PostScoreForm([FromForm] Score score)
+        {
+            Console.WriteLine(score.Highscore);
+          if (_context.Scores == null)
+          {
+              return Problem("Entity set 'ScoreContext.Scores'  is null.");
+          }
+            _context.Scores.Add(score);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetScore", new { id = score.Id }, score);
+        }
+
         [HttpPost("NewScore")]
-        public async Task<ActionResult<Score>> PostScore(Score score)
+        public async Task<ActionResult<Score>> PostScore( Score score)
         {
           if (_context.Scores == null)
           {
