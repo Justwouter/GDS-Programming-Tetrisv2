@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  TetrisAPI:
+    image: tetrisv2-api
+    container_name: TetrisAPI
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    volumes:
+      - ./apidata:/s
+    stdin_open: true
+    tty: true

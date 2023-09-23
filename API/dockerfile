@@ -1,0 +1,24 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 as build-env
+
+WORKDIR /src
+
+# Restore project
+COPY src/*.csproj .
+RUN dotnet restore
+
+# Copy current dir to docker
+COPY src .
+# RUN dotnet tool install -g dotnet-ef
+# RUN dotnet ef migrations add One
+RUN dotnet publish -c Release -o /publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 as runtime
+
+WORKDIR /publish
+
+COPY --from=build-env /publish .
+COPY --from=build-env /src/Database ./Database
+
+EXPOSE 80
+
+ENTRYPOINT ["dotnet", "API.dll"]
