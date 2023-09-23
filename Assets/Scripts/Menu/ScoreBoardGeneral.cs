@@ -10,8 +10,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreBoardGeneral : MonoBehaviour
 {
-    [SerializeField] public int amountOfRows = 5;
-    public GameObject rowPrefab;
+    [SerializeField] public int AmountOfRows = 5;
+    public GameObject RowPrefab;
     
 
     void Start(){
@@ -38,8 +38,8 @@ public class ScoreBoardGeneral : MonoBehaviour
 
 
     IEnumerator GetScoreboard(){
-        for(int i = 0; i < amountOfRows; i++){
-            UnityWebRequest request = UnityWebRequest.Get("http://localhost:5118/api/ScoreBoard/GetScoreBoardEntry/"+i);
+        for(int i = 0; i < AmountOfRows; i++){
+            UnityWebRequest request = UnityWebRequest.Get("https://tetris.swijnenburg.cc/api/ScoreBoard/GetScoreBoardEntry/"+i);
             yield return request.SendWebRequest();
 
             if(request.responseCode == 200){
@@ -53,7 +53,7 @@ public class ScoreBoardGeneral : MonoBehaviour
     
 
     private void CreateRowWithValues(float score, string name){
-        GameObject newRow = Instantiate(rowPrefab);
+        GameObject newRow = Instantiate(RowPrefab);
         newRow.transform.SetParent(transform);
         newRow.transform.localScale = new Vector3(1,1,1);
         newRow.GetComponent<ScoreBoardRow>()

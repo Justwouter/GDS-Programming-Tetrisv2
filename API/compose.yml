@@ -8,6 +8,6 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ./apidata:/s
+      - ./apidata:/publish/Database
     stdin_open: true
     tty: true

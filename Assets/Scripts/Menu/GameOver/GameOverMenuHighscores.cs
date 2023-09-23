@@ -49,7 +49,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
         form.AddField("userName",_username);
         form.AddField("highscore",_score.ToString().Replace(".",","), Encoding.UTF8);
 
-        UnityWebRequest request = UnityWebRequest.Post("http://localhost:5118/api/ScoreBoard/NewScoreForm", form);
+        UnityWebRequest request = UnityWebRequest.Post("https://tetris.swijnenburg.cc/api/ScoreBoard/NewScoreForm", form);
         
         // Disable/clear     inputbox as visual feedback after API request is made
         _inputField.enabled = false;

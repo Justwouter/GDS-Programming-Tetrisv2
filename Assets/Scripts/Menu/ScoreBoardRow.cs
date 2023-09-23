@@ -5,8 +5,8 @@ using TMPro;
 using UnityEngine;
 
 public class ScoreBoardRow : MonoBehaviour{
-    [SerializeField] string PlayerName;
-    [SerializeField] float Score = 0.0f;
+    [SerializeField] string _playerName;
+    [SerializeField] float _score = 0.0f;
 
     GameObject NameText;
     GameObject ScoreText;
@@ -21,12 +21,12 @@ public class ScoreBoardRow : MonoBehaviour{
     void Update()
     {
         
-        ScoreText.GetComponent<TextMeshProUGUI>().SetText(Score.ToString());
-        NameText.GetComponent<TextMeshProUGUI>().SetText(PlayerName);
+        ScoreText.GetComponent<TextMeshProUGUI>().SetText(_score.ToString());
+        NameText.GetComponent<TextMeshProUGUI>().SetText(_playerName);
     }
 
-    public void SetRowData(float Score, String PlayerName){
-        this.Score = Score;
-        this.PlayerName = PlayerName;
+    public void SetRowData(float score, String playerName){
+        this._score = score;
+        this._playerName = playerName;
     }
 }

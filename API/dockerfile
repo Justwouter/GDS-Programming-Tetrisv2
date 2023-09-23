@@ -17,7 +17,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 as runtime
 WORKDIR /publish
 
 COPY --from=build-env /publish .
-COPY --from=build-env /src/Database ./Database
+# COPY --from=build-env /src/Database ./Database
+RUN mkdir ./Database
 
 EXPOSE 80
 
