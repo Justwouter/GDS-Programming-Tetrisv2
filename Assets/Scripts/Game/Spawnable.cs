@@ -35,7 +35,6 @@ public class Spawnable : MonoBehaviour
         
         // Spawn next item when current item becomes stationary & at least a second has passed.
         if (rb.velocity.magnitude <= 0.01f && Time.time - DropTime > 1 && hasDropped){
-            Debug.Log("I trigger");
             FindAnyObjectByType<Spawner>().SpawnNext();
             enabled = false;
         }

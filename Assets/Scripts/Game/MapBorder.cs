@@ -18,7 +18,6 @@ public class MapBorder : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("I trigger!");
         Destroy(other.gameObject);
         FindAnyObjectByType<GameOver>().DisableGame();
     }

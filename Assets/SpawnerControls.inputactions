@@ -167,6 +167,28 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "179f9629-07b9-4087-b09f-c8f1b4ab4e63",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "254debf0-49aa-4cc4-bfbe-84fd02397863",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "cc03dcde-20fb-47db-888d-dbab2b21eaec",
                     "path": "2DVector",

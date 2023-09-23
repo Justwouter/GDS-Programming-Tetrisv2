@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour {
         
     }
 
-    // Store score in local data to use in GameOver scene
+    // Store score in local data for use in GameOver scene
     void OnDisable(){
         PlayerPrefs.SetFloat("score", currentScore);
     }
@@ -33,9 +33,8 @@ public class Spawner : MonoBehaviour {
 
     public void SpawnNext() {
         if(isActive){
-            Debug.Log("Spawn triggered!");
             int i = Random.Range(0, spawnables.Length);
-            // i = 3;
+            // i = 3; // Lock microwave for camera debug
             
             currentScore = CheckBlocks()-floorLine;
             // Find & update scoreboard and move spawner if neccesary
