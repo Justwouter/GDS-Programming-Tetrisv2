@@ -48,7 +48,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
         // Send data as www-form-urlencoded to the API
         WWWForm form = new();
         form.AddField("userName",_username);
-        form.AddField("highscore",_score.ToString(CultureInfo.InvariantCulture), Encoding.UTF8);
+        form.AddField("highscore",_score.ToString("n2",CultureInfo.InvariantCulture));
 
         UnityWebRequest request = UnityWebRequest.Post("https://tetrisapi.swijnenburg.cc/api/Score/NewScoreForm", form);
         
