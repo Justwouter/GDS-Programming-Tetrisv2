@@ -6,3 +6,5 @@ services:
     image: tetrisv2-webgl
     ports:
       - "8080:80"
+    # volumes: #Debug
+    #   - './nginx:/etc/nginx/conf.d'
