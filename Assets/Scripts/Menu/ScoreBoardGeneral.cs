@@ -39,7 +39,7 @@ public class ScoreBoardGeneral : MonoBehaviour
 
     IEnumerator GetScoreboard(){
         for(int i = 0; i < AmountOfRows; i++){
-            UnityWebRequest request = UnityWebRequest.Get("https://tetris.swijnenburg.cc/api/ScoreBoard/GetScoreBoardEntry/"+i);
+            UnityWebRequest request = UnityWebRequest.Get("https://tetrisapi.swijnenburg.cc/api/ScoreBoard/GetScoreBoardEntry/"+i);
             yield return request.SendWebRequest();
 
             if(request.responseCode == 200){
