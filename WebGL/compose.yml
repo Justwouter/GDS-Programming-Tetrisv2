@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  webgl:
+    container_name: TetrisV2-WebGL
+    image: tetrisv2-webgl
+    ports:
+      - "8080:80"
