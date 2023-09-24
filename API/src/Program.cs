@@ -51,6 +51,8 @@ app.MapGet("/css/SwaggerDark.css", () => {
   return Results.Stream(assembly.GetManifestResourceStream("API.Assets.SwaggerDark.css")!, "text/css");
 }).ExcludeFromDescription();
 
+app.UseCors("CorsAllowAll");
+
 // app.UseHttpsRedirection();
 
 app.UseAuthorization();
