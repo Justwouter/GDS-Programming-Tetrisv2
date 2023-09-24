@@ -101,6 +101,25 @@ namespace API.Controllers
             return CreatedAtAction("GetScore", new { id = score.Id }, score);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteScore(int id)
+        {
+            if (_context.Scores == null)
+            {
+                return NotFound();
+            }
+            var score = await _context.Scores.FindAsync(id);
+            if (score == null)
+            {
+                return NotFound();
+            }
+
+            _context.Scores.Remove(score);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool ScoreExists(int id)
         {
             return (_context.Scores?.Any(e => e.Id == id)).GetValueOrDefault();
