@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -17,7 +18,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
     bool _buttonUsed = false;
 
     void Start() {
-        _score = float.Parse(PlayerPrefs.GetFloat("score").ToString("n2"));
+        _score = float.Parse(PlayerPrefs.GetFloat("score").ToString("n2",CultureInfo.InvariantCulture));
         Debug.Log(_score.ToString());
         _inputField = GameObject.Find("Text - Username").GetComponent<TextMeshProUGUI>();
         _submitButton = GameObject.Find("Button - SubmitScore").GetComponent<Button>();
@@ -47,7 +48,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
         // Send data as www-form-urlencoded to the API
         WWWForm form = new();
         form.AddField("userName",_username);
-        form.AddField("highscore",_score.ToString(), Encoding.UTF8);
+        form.AddField("highscore",_score.ToString(CultureInfo.InvariantCulture), Encoding.UTF8);
 
         UnityWebRequest request = UnityWebRequest.Post("https://tetrisapi.swijnenburg.cc/api/Score/NewScoreForm", form);
         
@@ -58,7 +59,4 @@ public class GameOverMenuHighscores : MonoBehaviour {
         yield return request.SendWebRequest();
         Debug.Log(request.result);
     }
-
-
-   
 }
