@@ -5,8 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- The NETSDK1044 error shows up when building this project in docker becouse it is missing XML config files for every dependency. We have no use for these errors as all our dependencies are already compiled and present when building in docker -->
     <NoWarn>NETSDK1004;</NoWarn> 
+    <!-- Missing swagger XML error. Don't care and spams the logs -->
+    <NoWarn>CS1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <!-- Swagger CSS files -->
+    <EmbeddedResource Include="Assets/SwaggerDark.css" />
+
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.11" />
