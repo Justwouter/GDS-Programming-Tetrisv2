@@ -7,8 +7,17 @@ using API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ScoreContext>(options =>
-  options.UseSqlite(builder.Configuration.GetConnectionString("Scoreboard")));
+builder.Services.AddDbContext<ScoreContext>(options => {
+  options.UseSqlite(builder.Configuration.GetConnectionString("Scoreboard"));
+});
+
+builder.Services.AddCors(options => {
+  options.AddPolicy("CorsAllowAll",
+                        policy => policy.AllowAnyHeader()
+                                  .AllowAnyMethod()
+                                  .AllowAnyOrigin());
+});
+
 
 
 builder.Services.AddControllers();
