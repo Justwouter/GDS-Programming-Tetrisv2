@@ -9,9 +9,9 @@ using UnityEngine.InputSystem;
 public class Spawnable : MonoBehaviour
 {
     private Rigidbody2D rb;
-    float DropTime = 0;
-    private bool hasDropped = false;
-    Vector2 movement = Vector2.zero;
+    float _dropTime = 0;
+    private bool _hasDropped = false;
+    Vector2 _movement = Vector2.zero;
 
     void Start()
     {
@@ -23,18 +23,18 @@ public class Spawnable : MonoBehaviour
     void Update()
     {
         // Enable movement in pre-drop stage
-        if(!hasDropped){
+        if(!_hasDropped){
             GameOver floor = FindAnyObjectByType<GameOver>();
             float floorWidth = floor.GetComponent<MeshRenderer>().bounds.size.x / 2;
 
             // Only allow movement within the floor bounds
-            if(Mathf.Abs(transform.position.x + movement.x) < floorWidth){
-                transform.Translate(FindAnyObjectByType<Spawner>().speed * Time.deltaTime * movement);
+            if(Mathf.Abs(transform.position.x + _movement.x) < floorWidth){
+                transform.Translate(FindAnyObjectByType<Spawner>().speed * Time.deltaTime * new Vector2(_movement.x,0));
             }
         }
         
         // Spawn next item when current item becomes stationary & at least a second has passed.
-        if (rb.velocity.magnitude <= 0.01f && Time.time - DropTime > 1 && hasDropped){
+        else if (rb.velocity.magnitude <= 0.01f && Time.time - _dropTime > 1 && _hasDropped){
             FindAnyObjectByType<Spawner>().SpawnNext();
             enabled = false;
         }
@@ -45,7 +45,7 @@ public class Spawnable : MonoBehaviour
 
     //Input
     void OnMove(InputValue inputValue){
-        movement = inputValue.Get<Vector2>();
+        _movement = inputValue.Get<Vector2>();
     }
 
     void OnDrop(InputValue inputValue){
@@ -53,11 +53,12 @@ public class Spawnable : MonoBehaviour
     }
 
 
+
     // Helpers
     void EnableGravity(){
         rb.gravityScale = 1;
         rb.WakeUp();
-        DropTime = Time.time;
-        hasDropped = true;
+        _dropTime = Time.time;
+        _hasDropped = true;
     }
 }
