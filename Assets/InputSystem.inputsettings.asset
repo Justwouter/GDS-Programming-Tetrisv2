@@ -15,7 +15,6 @@ MonoBehaviour:
   m_SupportedDevices:
   - Keyboard
   - Mouse
-  - Touchscreen
   - Gamepad
   m_UpdateMode: 2
   m_MaxEventBytesPerUpdate: 5242880

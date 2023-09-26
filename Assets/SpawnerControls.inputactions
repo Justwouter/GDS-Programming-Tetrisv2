@@ -275,17 +275,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "d9ad3ef0-1368-4e9c-b238-6a1e61d17a16",
-                    "path": "<Touchscreen>/touch*/Press",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "Touchscreen",
-                    "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
                     "id": "cc03dcde-20fb-47db-888d-dbab2b21eaec",
                     "path": "2DVector",
@@ -350,17 +339,6 @@
                     "action": "MouseHold",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "82ad0b1c-a8e5-450e-b527-b4ed920c914f",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "Press(behavior=2)",
-                    "processors": "",
-                    "groups": "Touchscreen",
-                    "action": "MouseHold",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
@@ -388,17 +366,6 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Touchscreen",
-            "bindingGroup": "Touchscreen",
-            "devices": [
-                {
-                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }
