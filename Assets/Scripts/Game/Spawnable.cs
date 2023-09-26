@@ -63,16 +63,9 @@ public class Spawnable : MonoBehaviour {
     }
 
     void OnMouseHold(InputValue inputValue) {
-        Debug.Log("Ich werk");
+        // Debug.Log("Ich werk");
 
-        if (inputValue.isPressed) // the key has been pressed
-        {
-            _mouseActive = true;
-        }
-        else //the key has been released
-        {
-            _mouseActive = false;
-        }
+        _mouseActive = inputValue.isPressed;
     }
 
 
