@@ -45,10 +45,14 @@ namespace API.Controllers {
             if (_context.Scores == null) {
                 return Problem("Entity set 'ScoreContext.Scores'  is null.");
             }
-            _context.Scores.Add(score);
-            await _context.SaveChangesAsync();
+            if (score.Highscore < 99) {
+                _context.Scores.Add(score);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetScore", new { id = score.Id }, score);
+                return CreatedAtAction("GetScore", new { id = score.Id }, score);
+            }
+            return Problem(">100 is not possible. Please contact admins if you think it is.");
+
         }
 
         [HttpPost("Score/NewScoreForm")]
@@ -57,10 +61,13 @@ namespace API.Controllers {
             if (_context.Scores == null) {
                 return Problem("Entity set 'ScoreContext.Scores'  is null.");
             }
-            _context.Scores.Add(score);
-            await _context.SaveChangesAsync();
+            if (score.Highscore < 99) {
+                _context.Scores.Add(score);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetScore", new { id = score.Id }, score);
+                return CreatedAtAction("GetScore", new { id = score.Id }, score);
+            }
+            return Problem(">100 is not possible. Please contact admins if you think it is.");
         }
 
         [HttpDelete("Score/DeleteScore/{id}")]
