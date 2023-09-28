@@ -86,6 +86,18 @@ namespace API.Controllers {
             return NoContent();
         }
 
+        [HttpDelete("Score/DeleteScoreRange/{to}-{from}")]
+        public async Task<IActionResult> DeleteRange(int to, int from) {
+            for (int i = from; i < to; i++) {
+                var score = await _context.Scores.FindAsync(i);
+                if (score != null) {
+                    _context.Scores.Remove(score);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
 
 
 
