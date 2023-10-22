@@ -6,19 +6,19 @@ using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour {
     public GameObject[] spawnables;
-    public float speed = 3.5F;
-    private int amountOfSpawns;
-    private float currentScore = 0;
-    private float floorLine;
-    private float startHight;
-    public bool isActive = true;
+    public float Speed = 3.5F;
+    private int _amountOfSpawns;
+    private float _currentScore = 0;
+    private float _floorLine;
+    private float _startHight;
+    public bool IsActive = true;
 
     
 
     void Start(){
         SpawnNext();
-        floorLine = FindObjectOfType<GameOver>().transform.position.y;
-        startHight = transform.position.y;
+        _floorLine = FindObjectOfType<GameOver>().transform.position.y;
+        _startHight = transform.position.y;
     }
 
     void Update(){
@@ -27,23 +27,27 @@ public class Spawner : MonoBehaviour {
 
     // Store score in local data for use in GameOver scene
     void OnDisable(){
-        PlayerPrefs.SetFloat("score", currentScore);
+        PlayerPrefs.SetFloat("score", _currentScore);
     }
 
 
     public void SpawnNext() {
-        if(isActive){
+        if(IsActive){
             int i = Random.Range(0, spawnables.Length);
             // i = 3; // Lock microwave for camera debug
             
-            currentScore = CheckBlocks()-floorLine;
+            _currentScore = CheckBlocks()-_floorLine;
             // Find & update scoreboard and move spawner if neccesary
-            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", currentScore);
+            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", _currentScore);
             MoveSpawnerHight();
 
             // Spawn Item at current Position
-            Instantiate(spawnables[i], transform.position, Quaternion.identity);
-            amountOfSpawns++;
+            GameObject spawnedItem = Instantiate(spawnables[i], transform.position, Quaternion.identity);
+            
+            // Place the spawned items under the spawner in hierarchy
+            spawnedItem.transform.SetParent(transform);
+            
+            _amountOfSpawns++;
         }
     }
 
@@ -55,8 +59,8 @@ public class Spawner : MonoBehaviour {
         if(highestBlock > transform.position.y-5){
             newYPos = highestBlock+5;
         }
-        if(highestBlock < startHight-5){
-            newYPos = startHight;
+        if(highestBlock < _startHight-5){
+            newYPos = _startHight;
         }
 
         transform.position = new Vector2(transform.position.x,newYPos);

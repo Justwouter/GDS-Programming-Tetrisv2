@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Unity.Entities.UniversalDelegates;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,11 +37,11 @@ public class Spawnable : MonoBehaviour {
 
             }
             else if (IsMoveValid(_movement)) {
-                transform.Translate(FindAnyObjectByType<Spawner>().speed * Time.deltaTime * new Vector2(_movement.x, 0));
+                transform.Translate(FindAnyObjectByType<Spawner>().Speed * Time.deltaTime * new Vector2(_movement.x, 0));
             }
         }
 
-        // Spawn next item when current item becomes stationary & at least a second has passed.
+        // Spawn next item when current item becomes stationary & at least a second since the drop has passed.
         else if (rb.velocity.magnitude <= 0.01f && Time.time - _dropTime > 1 && _hasDropped) {
             FindAnyObjectByType<Spawner>().SpawnNext();
             enabled = false;
@@ -63,8 +61,6 @@ public class Spawnable : MonoBehaviour {
     }
 
     void OnMouseHold(InputValue inputValue) {
-        // Debug.Log("Ich werk");
-
         _mouseActive = inputValue.isPressed;
     }
 
