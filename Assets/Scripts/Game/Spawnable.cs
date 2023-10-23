@@ -65,8 +65,6 @@ public class Spawnable : MonoBehaviour {
     }
 
 
-
-
     // Helpers
     void EnableGravity() {
         rb.gravityScale = 1;

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
 
 using TMPro;
@@ -52,7 +50,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
 
         UnityWebRequest request = UnityWebRequest.Post("https://tetrisapi.swijnenburg.cc/api/Score/NewScoreForm", form);
         
-        // Disable/clear     inputbox as visual feedback after API request is made
+        // Disable/clear inputbox as visual feedback after API request is made
         _inputField.enabled = false;
         
 
