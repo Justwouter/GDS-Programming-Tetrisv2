@@ -1,20 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-public class MapBorder : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class MapBorder : MonoBehaviour {
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Spawner spawner = FindObjectOfType<Spawner>();
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour {
-    public GameObject[] spawnables;
+    public GameObject[] Spawnables;
     public float Speed = 3.5F;
     private int _amountOfSpawns;
     private float _currentScore = 0;
@@ -21,10 +21,6 @@ public class Spawner : MonoBehaviour {
         _startHight = transform.position.y;
     }
 
-    void Update(){
-        
-    }
-
     // Store score in local data for use in GameOver scene
     void OnDisable(){
         PlayerPrefs.SetFloat("score", _currentScore);
@@ -33,7 +29,7 @@ public class Spawner : MonoBehaviour {
 
     public void SpawnNext() {
         if(IsActive){
-            int i = Random.Range(0, spawnables.Length);
+            int i = Random.Range(0, Spawnables.Length);
             // i = 3; // Lock microwave for camera debug
             
             _currentScore = CheckBlocks()-_floorLine;
@@ -42,7 +38,7 @@ public class Spawner : MonoBehaviour {
             MoveSpawnerHight();
 
             // Spawn Item at current Position
-            GameObject spawnedItem = Instantiate(spawnables[i], transform.position, Quaternion.identity);
+            GameObject spawnedItem = Instantiate(Spawnables[i], transform.position, Quaternion.identity);
             
             // Place the spawned items under the spawner in hierarchy
             spawnedItem.transform.SetParent(transform);
