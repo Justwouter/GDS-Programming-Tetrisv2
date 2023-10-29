@@ -2,25 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+
 using Unity.Entities;
 using Unity.Entities.UniversalDelegates;
+
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class ScoreBoardGeneral : MonoBehaviour
-{
-    [SerializeField] public int AmountOfRows = 5;
+public class ScoreBoardGeneral : MonoBehaviour {
+    [SerializeField] private int _amountOfRows = 5;
     public GameObject RowPrefab;
-    
 
-    void Start(){
+
+    void Start() {
         StartCoroutine(GetScoreboard());
     }
 
-    void Update()
-    {
-        
+    void Update() {
+
         // if(Input.GetKeyDown(KeyCode.E)){
         //    GameObject newRow = Instantiate(rowPrefab);
         //    newRow.transform.SetParent(transform);
@@ -37,12 +37,12 @@ public class ScoreBoardGeneral : MonoBehaviour
     }
 
 
-    IEnumerator GetScoreboard(){
-        for(int i = 0; i < AmountOfRows; i++){
-            UnityWebRequest request = UnityWebRequest.Get("https://tetrisapi.swijnenburg.cc/api/ScoreBoard/GetScoreBoardEntry/"+i);
+    IEnumerator GetScoreboard() {
+        for (int i = 0; i < _amountOfRows; i++) {
+            UnityWebRequest request = UnityWebRequest.Get("https://tetrisapi.swijnenburg.cc/api/ScoreBoard/GetScoreBoardEntry/" + i);
             yield return request.SendWebRequest();
 
-            if(request.responseCode == 200){
+            if (request.responseCode == 200) {
                 Debug.Log(request.downloadHandler.text);
                 ScoreboardEntry entry = JsonUtility.FromJson<ScoreboardEntry>(request.downloadHandler.text);
                 CreateRowWithValues((float)entry.highscore, entry.userName);
@@ -50,15 +50,15 @@ public class ScoreBoardGeneral : MonoBehaviour
         }
     }
 
-    
 
-    private void CreateRowWithValues(float score, string name){
+
+    private void CreateRowWithValues(float score, string name) {
         GameObject newRow = Instantiate(RowPrefab);
         newRow.transform.SetParent(transform);
-        newRow.transform.localScale = new Vector3(1,1,1);
+        newRow.transform.localScale = new Vector3(1, 1, 1);
         newRow.GetComponent<ScoreBoardRow>()
-            .SetRowData(score,name);
-        
+            .SetRowData(score, name);
+
     }
 
 
