@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,7 +19,7 @@ public class GameOverMenuHighscores : MonoBehaviour {
     bool _buttonUsed = false;
 
     void Start() {
-        _score = float.Parse(PlayerPrefs.GetFloat("score").ToString("n2",CultureInfo.InvariantCulture));
+        _score = float.Parse(string.Format("{00:.00}", PlayerPrefs.GetFloat("score")));
         Debug.Log(_score.ToString());
         _inputField = GameObject.Find("Text - Username").GetComponent<TextMeshProUGUI>();
         _submitButton = GameObject.Find("Button - SubmitScore").GetComponent<Button>();
@@ -29,32 +30,32 @@ public class GameOverMenuHighscores : MonoBehaviour {
         EvalName();
     }
 
-    public void EvalName(){
+    public void EvalName() {
         Regex usernameMatcher = new(@"\b[a-zA-Z]{4,10}\b");
-        if(!_buttonUsed)
+        if (!_buttonUsed)
             _submitButton.interactable = usernameMatcher.IsMatch(_inputField.GetParsedText());
     }
 
-    public void OnSubmit(){
+    public void OnSubmit() {
         StartCoroutine(SendRequest());
         _submitButton.enabled = false;
         _buttonUsed = true;
         _submitButton.interactable = false;
-        
+
 
     }
 
-    IEnumerator SendRequest(){
+    IEnumerator SendRequest() {
         // Send data as www-form-urlencoded to the API
         WWWForm form = new();
-        form.AddField("userName",_username);
-        form.AddField("highscore",_score.ToString("n2",CultureInfo.InvariantCulture));
+        form.AddField("userName", _username);
+        form.AddField("highscore", string.Format("{00:.00}", _score));
 
         UnityWebRequest request = UnityWebRequest.Post("https://tetrisapi.swijnenburg.cc/api/Score/NewScoreForm", form);
-        
+
         // Disable/clear     inputbox as visual feedback after API request is made
         _inputField.enabled = false;
-        
+
 
         yield return request.SendWebRequest();
         Debug.Log(request.result);
