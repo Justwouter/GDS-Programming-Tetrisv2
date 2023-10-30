@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreBoardGeneral : MonoBehaviour {
-    [SerializeField] private int _amountOfRows = 5;
+    [SerializeField] private int amountOfRows = 5;
     public GameObject RowPrefab;
 
 
@@ -38,7 +38,7 @@ public class ScoreBoardGeneral : MonoBehaviour {
 
 
     IEnumerator GetScoreboard() {
-        for (int i = 0; i < _amountOfRows; i++) {
+        for (int i = 0; i < amountOfRows; i++) {
             UnityWebRequest request = UnityWebRequest.Get("https://tetrisapi.swijnenburg.cc/api/ScoreBoard/GetScoreBoardEntry/" + i);
             yield return request.SendWebRequest();
 

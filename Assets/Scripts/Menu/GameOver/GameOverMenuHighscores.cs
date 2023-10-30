@@ -10,35 +10,35 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class GameOverMenuHighscores : MonoBehaviour {
-    float _score;
-    string _username;
-    TextMeshProUGUI _inputField;
-    Button _submitButton;
-    bool _buttonUsed = false;
+    private float score;
+    private string username;
+    private TextMeshProUGUI inputField;
+    private Button submitButton;
+    bool buttonUsed = false;
 
     void Start() {
-        _score = float.Parse(string.Format("{00:.00}", PlayerPrefs.GetFloat("score")));
-        Debug.Log(_score.ToString());
-        _inputField = GameObject.Find("Text - Username").GetComponent<TextMeshProUGUI>();
-        _submitButton = GameObject.Find("Button - SubmitScore").GetComponent<Button>();
+        score = float.Parse(string.Format("{00:.00}", PlayerPrefs.GetFloat("score")));
+        Debug.Log(score.ToString());
+        inputField = GameObject.Find("Text - Username").GetComponent<TextMeshProUGUI>();
+        submitButton = GameObject.Find("Button - SubmitScore").GetComponent<Button>();
     }
 
     void Update() {
-        _username = _inputField.GetParsedText();
+        username = inputField.GetParsedText();
         EvalName();
     }
 
     public void EvalName() {
         Regex usernameMatcher = new(@"\b[a-zA-Z]{4,10}\b");
-        if (!_buttonUsed)
-            _submitButton.interactable = usernameMatcher.IsMatch(_inputField.GetParsedText());
+        if (!buttonUsed)
+            submitButton.interactable = usernameMatcher.IsMatch(inputField.GetParsedText());
     }
 
     public void OnSubmit() {
         StartCoroutine(SendRequest());
-        _submitButton.enabled = false;
-        _buttonUsed = true;
-        _submitButton.interactable = false;
+        submitButton.enabled = false;
+        buttonUsed = true;
+        submitButton.interactable = false;
 
 
     }
@@ -46,13 +46,13 @@ public class GameOverMenuHighscores : MonoBehaviour {
     IEnumerator SendRequest() {
         // Send data as www-form-urlencoded to the API
         WWWForm form = new();
-        form.AddField("userName", _username);
-        form.AddField("highscore", string.Format("{00:.00}", _score));
+        form.AddField("userName", username);
+        form.AddField("highscore", string.Format("{00:.00}", score));
 
         UnityWebRequest request = UnityWebRequest.Post("https://tetrisapi.swijnenburg.cc/api/Score/NewScoreForm", form);
         
         // Disable/clear inputbox as visual feedback after API request is made
-        _inputField.enabled = false;
+        inputField.enabled = false;
 
 
         yield return request.SendWebRequest();

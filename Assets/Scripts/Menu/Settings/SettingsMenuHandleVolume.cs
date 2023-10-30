@@ -7,19 +7,19 @@ using UnityEngine.UI;
 
 public class SettingsMenuHandleVolume : MonoBehaviour {
 
-    [SerializeField] private Slider _volumeSlider;
-    private float _currentVolume;
+    [SerializeField] private Slider volumeSlider;
+    private float currentVolume;
 
     void Awake() {
-        _currentVolume = PlayerPrefs.GetFloat("IplayerVolume");
-        _volumeSlider.value = _currentVolume;
+        currentVolume = PlayerPrefs.GetFloat("IplayerVolume");
+        volumeSlider.value = currentVolume;
     }
 
     public void VolumeUpdater(float value) {
         Debug.Log("Set volume to " + value);
-        _currentVolume = value;
-        PlayerPrefs.SetFloat("IplayerVolume",_currentVolume);
-        AudioListener.volume = _currentVolume;
+        currentVolume = value;
+        PlayerPrefs.SetFloat("IplayerVolume",currentVolume);
+        AudioListener.volume = currentVolume;
     }
 
 }

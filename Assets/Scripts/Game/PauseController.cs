@@ -6,11 +6,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PauseController : MonoBehaviour {
-    // Start is called before the first frame update
     public bool IsPaused = false;
-    private bool _isPauseMenuShown = false;
+    // private bool isPauseMenuShown = false;
 
-    // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.P)) {
             IsPaused = !IsPaused;
@@ -25,10 +23,6 @@ public class PauseController : MonoBehaviour {
                 Time.timeScale = 1;
             }
         }
-
-
-
-
     }
 
     private void DisableInput() {

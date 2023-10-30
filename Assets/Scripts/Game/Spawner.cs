@@ -7,23 +7,23 @@ using UnityEngine.InputSystem;
 public class Spawner : MonoBehaviour {
     public GameObject[] Spawnables;
     public float Speed = 3.5F;
-    private int _amountOfSpawns;
-    private float _currentScore = 0;
-    private float _floorLine;
-    private float _startHight;
+    private int amountOfSpawns;
+    private float currentScore = 0;
+    private float floorLine;
+    private float startHight;
     public bool IsActive = true;
 
     
 
     void Start(){
         SpawnNext();
-        _floorLine = FindObjectOfType<GameOver>().transform.position.y;
-        _startHight = transform.position.y;
+        floorLine = FindObjectOfType<GameOver>().transform.position.y;
+        startHight = transform.position.y;
     }
 
     // Store score in local data for use in GameOver scene
     void OnDisable(){
-        PlayerPrefs.SetFloat("score", _currentScore);
+        PlayerPrefs.SetFloat("score", currentScore);
     }
 
 
@@ -32,9 +32,9 @@ public class Spawner : MonoBehaviour {
             int i = Random.Range(0, Spawnables.Length);
             // i = 3; // Lock microwave for camera debug
             
-            _currentScore = CheckBlocks()-_floorLine;
+            currentScore = CheckBlocks()-floorLine;
             // Find & update scoreboard and move spawner if neccesary
-            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", _currentScore);
+            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", currentScore);
             MoveSpawnerHight();
 
             // Spawn Item at current Position
@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour {
             // Place the spawned items under the spawner in hierarchy
             spawnedItem.transform.SetParent(transform);
             
-            _amountOfSpawns++;
+            amountOfSpawns++;
         }
     }
 
@@ -55,8 +55,8 @@ public class Spawner : MonoBehaviour {
         if(highestBlock > transform.position.y-5){
             newYPos = highestBlock+5;
         }
-        if(highestBlock < _startHight-5){
-            newYPos = _startHight;
+        if(highestBlock < startHight-5){
+            newYPos = startHight;
         }
 
         transform.position = new Vector2(transform.position.x,newYPos);
