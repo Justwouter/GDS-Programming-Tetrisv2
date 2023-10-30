@@ -19,7 +19,7 @@ public class ScoreBoardGeneral : MonoBehaviour {
         StartCoroutine(GetScoreboard());
     }
 
-    void Update() {
+    // void Update() {
 
         // if(Input.GetKeyDown(KeyCode.E)){
         //    GameObject newRow = Instantiate(rowPrefab);
@@ -34,7 +34,7 @@ public class ScoreBoardGeneral : MonoBehaviour {
         //         }
         //     }
         // }
-    }
+    // }
 
 
     IEnumerator GetScoreboard() {

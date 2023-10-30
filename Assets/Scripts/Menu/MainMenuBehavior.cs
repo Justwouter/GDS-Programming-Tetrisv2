@@ -6,7 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuBehavior : MonoBehaviour {
     public void OnPlayButton() {
-        SceneManager.LoadScene("MainGame");
+        if (PlayerPrefs.GetInt("HasPlayedBefore") == 1) {
+            SceneManager.LoadScene("MainGame");
+
+        }
+        else {
+            SceneManager.LoadScene("Tutorial");
+        }
     }
 
     public void OnQuitButton() {
@@ -16,5 +22,10 @@ public class MainMenuBehavior : MonoBehaviour {
 
     public void OnSettingsButton() {
         SceneManager.LoadScene("SettingsMenu");
+    }
+
+    public void Test(){
+        PlayerPrefs.SetInt("HasPlayedBefore",0);
+        PlayerPrefs.Save();
     }
 }

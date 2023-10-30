@@ -985,7 +985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac1320e79515b80e86e1674373fdb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnables:
+  Spawnables:
   - {fileID: 8992246417178075630, guid: 1b0f1f9822d2e4b4f8531cb077ed8db6, type: 3}
   - {fileID: 6738578727952127250, guid: d3333d4b5dd6605c4bc4dda16486c03b, type: 3}
   - {fileID: 3769215834158878374, guid: 84d1533c1f1482a21909078970bfc05b, type: 3}
