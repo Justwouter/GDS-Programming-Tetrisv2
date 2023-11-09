@@ -67,10 +67,12 @@ public class Spawnable : MonoBehaviour {
 
     // Helpers
     void EnableGravity() {
-        rb.gravityScale = 1;
-        rb.WakeUp();
-        dropTime = Time.time;
-        hasDropped = true;
+        if (!FindAnyObjectByType<PauseController>().WasPaused) {
+            rb.gravityScale = 1;
+            rb.WakeUp();
+            dropTime = Time.time;
+            hasDropped = true;
+        }
     }
 
     bool IsMoveValid(Vector3 move) {

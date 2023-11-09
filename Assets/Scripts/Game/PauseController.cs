@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PauseController : MonoBehaviour {
     public bool IsPaused = false;
+    public bool WasPaused = false;
     // private bool isPauseMenuShown = false;
 
     void Update() {
@@ -19,6 +20,7 @@ public class PauseController : MonoBehaviour {
                 Time.timeScale = 0;
             }
             else {
+                StartCoroutine(WaitASecond());
                 EnableInput();
                 Time.timeScale = 1;
             }
@@ -47,5 +49,13 @@ public class PauseController : MonoBehaviour {
 
             }
         }
+    }
+
+    // Set the bool to false for 0.5 seconds after time is enabled.
+    // Used to block inputsystems event queing during timeScale 0
+    IEnumerator WaitASecond(){
+        WasPaused = true;
+        yield return new WaitForSecondsRealtime(0.5f);
+        WasPaused = false;
     }
 }
