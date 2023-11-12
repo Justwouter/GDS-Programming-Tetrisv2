@@ -27,6 +27,7 @@ public class PauseController : MonoBehaviour {
         }
     }
 
+    // Should in theory disable inputsystem. Problem being it does not.
     private void DisableInput() {
         Spawnable[] spawnables = FindObjectsOfType<Spawnable>();
         foreach (Spawnable item in spawnables) {
@@ -39,6 +40,8 @@ public class PauseController : MonoBehaviour {
             }
         }
     }
+
+    // Should in theory re-enable inputsystem.
     private void EnableInput() {
         Spawnable[] spawnables = FindObjectsOfType<Spawnable>();
         foreach (Spawnable item in spawnables) {
