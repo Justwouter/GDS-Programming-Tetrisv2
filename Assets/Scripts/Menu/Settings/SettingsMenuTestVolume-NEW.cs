@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class SettingsMenuTestVolume : MonoBehaviour {
+public class SettingsMenuTestVolumeNEW : MonoBehaviour {
     [SerializeField] private AudioManager jukebox;
 
 

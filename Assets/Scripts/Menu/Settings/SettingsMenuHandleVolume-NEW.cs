@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsMenuHandleVolume : MonoBehaviour {
+public class SettingsMenuHandleVolumeNEW : MonoBehaviour {
     [SerializeField] AudioManager aManager;
     [SerializeField] private Slider musicSlider, fxSlider;
     private float currentMusicVolume, currentFXVolume;
