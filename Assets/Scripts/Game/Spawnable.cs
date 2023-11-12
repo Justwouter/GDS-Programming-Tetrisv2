@@ -58,9 +58,12 @@ public class Spawnable : MonoBehaviour {
 
     void OnDrop(InputValue inputValue) {
         // Used to avoid the input flood after pressing buttons during pause
-        if (!FindAnyObjectByType<PauseController>().WasPaused) {
+        if (!FindAnyObjectByType<PauseController>().WasPaused && !hasDropped) {
+
             FindAnyObjectByType<Spawner>().PlaySound();
+
             EnableGravity();
+
         }
     }
 
