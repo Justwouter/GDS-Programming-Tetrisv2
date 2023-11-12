@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private GameObject[] spawnables;
     [SerializeField] private AudioSource fXSource;
     [SerializeField] private Transform itemContainer;
+    [SerializeField] private TextMeshProUGUI scoreboard;
     public float Speed = 3.5F;
     private int amountOfSpawns;
     private float currentScore = 0;
@@ -36,7 +37,7 @@ public class Spawner : MonoBehaviour {
             
             currentScore = CheckBlocks()-floorLine;
             // Find & update scoreboard and move spawner if neccesary
-            FindAnyObjectByType<TextMeshProUGUI>().SetText("Score: {0:2}", currentScore);
+            scoreboard.SetText("Score: {0:2}", currentScore);
             MoveSpawnerHight();
 
             // Spawn Item at current Position

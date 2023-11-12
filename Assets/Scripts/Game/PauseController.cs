@@ -8,22 +8,33 @@ using UnityEngine.InputSystem;
 public class PauseController : MonoBehaviour {
     public bool IsPaused = false;
     public bool WasPaused = false;
+    [SerializeField] private Canvas pauseMenu;
+    [SerializeField] private AudioSource jukebox;
     // private bool isPauseMenuShown = false;
-
+    void Awake() {
+        pauseMenu.enabled = false;
+    }
     void Update() {
         if (Input.GetKeyDown(KeyCode.P)) {
-            IsPaused = !IsPaused;
-            // Time.timeScale = IsPaused ? 0 : 1;
+            HandlePauseSwitch();
+        }
+    }
 
-            if (IsPaused) {
-                DisableInput();
-                Time.timeScale = 0;
-            }
-            else {
-                StartCoroutine(WaitASecond());
-                EnableInput();
-                Time.timeScale = 1;
-            }
+    public void HandlePauseSwitch() {
+        IsPaused = !IsPaused;
+        // Time.timeScale = IsPaused ? 0 : 1;
+        if (IsPaused) {
+            jukebox.Pause();
+            pauseMenu.enabled = true;
+            DisableInput();
+            Time.timeScale = 0;
+        }
+        else {
+            jukebox.UnPause();
+            pauseMenu.enabled = false;
+            StartCoroutine(WaitASecond());
+            EnableInput();
+            Time.timeScale = 1;
         }
     }
 
@@ -56,7 +67,7 @@ public class PauseController : MonoBehaviour {
 
     // Set the bool to false for 0.5 seconds after time is enabled.
     // Used to block inputsystems event queing during timeScale 0
-    IEnumerator WaitASecond(){
+    IEnumerator WaitASecond() {
         WasPaused = true;
         yield return new WaitForSecondsRealtime(0.5f);
         WasPaused = false;
