@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Spawner : MonoBehaviour {
-    public GameObject[] Spawnables;
+    [SerializeField] private GameObject[] spawnables;
+    [SerializeField] private AudioSource fXSource;
+    [SerializeField] private Transform itemContainer;
     public float Speed = 3.5F;
     private int amountOfSpawns;
     private float currentScore = 0;
@@ -29,8 +31,8 @@ public class Spawner : MonoBehaviour {
 
     public void SpawnNext() {
         if(IsActive){
-            int i = Random.Range(0, Spawnables.Length);
-            // i = 3; // Lock microwave for camera debug
+            int i = Random.Range(0, spawnables.Length);
+            //i = 5; // Lock microwave for camera debug
             
             currentScore = CheckBlocks()-floorLine;
             // Find & update scoreboard and move spawner if neccesary
@@ -38,10 +40,10 @@ public class Spawner : MonoBehaviour {
             MoveSpawnerHight();
 
             // Spawn Item at current Position
-            GameObject spawnedItem = Instantiate(Spawnables[i], transform.position, Quaternion.identity);
+            GameObject spawnedItem = Instantiate(spawnables[i], transform.position, Quaternion.identity);
             
             // Place the spawned items under the spawner in hierarchy
-            spawnedItem.transform.SetParent(transform);
+            spawnedItem.transform.SetParent(itemContainer);
             
             amountOfSpawns++;
         }
@@ -71,6 +73,10 @@ public class Spawner : MonoBehaviour {
             }
         }
         return highestY;
+    }
+
+    public void PlaySound(){
+        fXSource.Play();
     }
 
 }

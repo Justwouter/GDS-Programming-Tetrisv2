@@ -57,7 +57,11 @@ public class Spawnable : MonoBehaviour {
     }
 
     void OnDrop(InputValue inputValue) {
-        EnableGravity();
+        // Used to avoid the input flood after pressing buttons during pause
+        if (!FindAnyObjectByType<PauseController>().WasPaused) {
+            FindAnyObjectByType<Spawner>().PlaySound();
+            EnableGravity();
+        }
     }
 
     void OnMouseHold(InputValue inputValue) {
@@ -67,12 +71,11 @@ public class Spawnable : MonoBehaviour {
 
     // Helpers
     void EnableGravity() {
-        if (!FindAnyObjectByType<PauseController>().WasPaused) {
-            rb.gravityScale = 1;
-            rb.WakeUp();
-            dropTime = Time.time;
-            hasDropped = true;
-        }
+        rb.gravityScale = 1;
+        rb.WakeUp();
+        dropTime = Time.time;
+        hasDropped = true;
+
     }
 
     bool IsMoveValid(Vector3 move) {
