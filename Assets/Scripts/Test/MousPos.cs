@@ -22,11 +22,11 @@ public class MousPos : MonoBehaviour {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(_mousPos);
         if (worldPos != _worldPos) {
             _worldPos = worldPos;
-            
-            
+
+
         }
 
-        if(MouseHold){
+        if (MouseHold) {
             Block.transform.position = new Vector2(_worldPos.x, Block.transform.position.y);
         }
 
@@ -35,7 +35,7 @@ public class MousPos : MonoBehaviour {
 
     void OnMouseHold(InputValue inputValue) {
         Debug.Log("Ich werk");
-        
+
         if (inputValue.isPressed) // the key has been pressed
         {
             MouseHold = true;

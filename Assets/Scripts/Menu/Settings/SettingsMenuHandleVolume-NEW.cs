@@ -14,7 +14,7 @@ public class SettingsMenuHandleVolumeNEW : MonoBehaviour {
         fxSlider.value = currentFXVolume;
     }
 
-    
+
 
     public void FXUpdater(float value) {
         Debug.Log("Set IplayerFXVolume to " + value);

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +21,8 @@ public class MainMenuBehavior : MonoBehaviour {
         SceneManager.LoadScene("SettingsMenu");
     }
 
-    public void Test(){
-        PlayerPrefs.SetInt("HasPlayedBefore",0);
+    public void Test() {
+        PlayerPrefs.SetInt("HasPlayedBefore", 0);
         PlayerPrefs.Save();
     }
 }

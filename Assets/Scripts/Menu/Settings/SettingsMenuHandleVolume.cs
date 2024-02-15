@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +14,7 @@ public class SettingsMenuHandleVolume : MonoBehaviour {
     public void VolumeUpdater(float value) {
         Debug.Log("Set volume to " + value);
         currentVolume = value;
-        PlayerPrefs.SetFloat("IplayerVolume",currentVolume);
+        PlayerPrefs.SetFloat("IplayerVolume", currentVolume);
         AudioListener.volume = currentVolume;
     }
 

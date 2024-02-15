@@ -10,30 +10,30 @@ public class AudioManager : MonoBehaviour {
         fxSource.volume = PlayerPrefs.GetFloat("IplayerFXVolume");
     }
 
-    public void PlayFX(){
+    public void PlayFX() {
         fxSource.Play();
     }
-    public void StopFX(){
+    public void StopFX() {
         fxSource.Stop();
     }
-    public bool IsFXPlaying(){
+    public bool IsFXPlaying() {
         return fxSource.isPlaying;
     }
 
-    public void SetFXVolume(float volume){
+    public void SetFXVolume(float volume) {
         fxSource.volume = volume;
     }
 
-    public void PlayMusic(){
+    public void PlayMusic() {
         musicSource.Play();
     }
-    public void StopMusic(){
+    public void StopMusic() {
         musicSource.Stop();
     }
-    public bool IsMusicPlaying(){
+    public bool IsMusicPlaying() {
         return musicSource.isPlaying;
     }
-    public void SetMusicVolume(float volume){
+    public void SetMusicVolume(float volume) {
         musicSource.volume = volume;
     }
 }

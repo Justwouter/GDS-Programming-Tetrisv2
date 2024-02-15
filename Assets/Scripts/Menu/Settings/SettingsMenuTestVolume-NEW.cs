@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 public class SettingsMenuTestVolumeNEW : MonoBehaviour {
@@ -11,11 +8,11 @@ public class SettingsMenuTestVolumeNEW : MonoBehaviour {
         jukebox.PlayFX();
     }
 
-    public void OnMusicButtonPressed(){
-        if(jukebox.IsMusicPlaying()){
+    public void OnMusicButtonPressed() {
+        if (jukebox.IsMusicPlaying()) {
             jukebox.StopMusic();
         }
-        else{
+        else {
             jukebox.PlayMusic();
         }
     }
